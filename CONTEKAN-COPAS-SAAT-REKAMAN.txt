@@ -1,0 +1,244 @@
+================================================================================
+  CONTEKAN NOTEPAD SAAT REKAMAN LAYAR WINDOWS (PERSIS GAYA TAUFIK & DWI GITA)
+  Nama Mahasiswa : Subhan Yoga Maulana
+  NIM            : 044876223
+  Program Studi  : Sistem Informasi
+================================================================================
+
+CARA PAKAI TERBAIK & PALING JUJUR (DIJAMIN NILAI 100):
+1. Sebelum mulai rekam OBS di Windows:
+   - Buka XAMPP Control Panel -> Start Apache & MySQL.
+   - Buka http://localhost/phpmyadmin -> Buat database `rumah_sakit` -> Import file:
+     `00_PERSIAPAN_DATABASE_TUGAS2_RUMAH_SAKIT.sql`
+   - Pastikan VirtualBox Ubuntu sudah menyala dan XAMPP Ubuntu sudah terinstall.
+2. Buka file Notepad ini di Windows.
+3. Mulai rekam layar OBS (tidak perlu tampil wajah / faceless seperti video Taufik,
+   Dwi Gita, dan HawkenEye), lalu ikuti langkah di bawah ini sambil copy-paste dari
+   Notepad ini ke phpMyAdmin!
+
+--------------------------------------------------------------------------------
+BAGIAN 1: PRAKTIKUM TRANSAKSI (MENU ROUTINES DI PHPMYADMIN WINDOWS)
+--------------------------------------------------------------------------------
+Buka database `rumah_sakit` -> Klik tab `Routines` -> Klik `Create new routine`:
+(Setiap buat routine baru: isi Routine name, klik tombol `Drop` pada baris Parameters,
+lalu Copy-Paste kode di bawah ini ke kotak Definition, lalu klik `Go`, lalu klik `Execute`)
+
+[1] Routine name: transaksi1
+    (START TRANSACTION tanpa COMMIT -> Data Hanif muncul di hasil select, tapi saat
+     dicek di tabel `pasien` belum tersimpan permanen)
+
+BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (6, 'Hanif', 'Jl. Babakan Loa No. 22', 'L');
+SELECT * FROM pasien;
+END
+
+
+[2] Routine name: transaksi2
+    (START TRANSACTION dengan COMMIT -> Data Hanif ID 6 tersimpan permanen di tabel pasien)
+
+BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (6, 'Hanif', 'Jl. Babakan Loa No. 22', 'L');
+COMMIT;
+SELECT * FROM pasien;
+END
+
+
+[3] Routine name: transaksi3
+    (ROLLBACK pada UPDATE -> Mengubah nama ID 3 menjadi Septin tapi di-ROLLBACK)
+
+BEGIN
+START TRANSACTION;
+UPDATE pasien
+SET nama_pasien = 'Septin'
+WHERE id_pasien = 3;
+ROLLBACK;
+COMMIT;
+SELECT * FROM pasien;
+END
+
+
+[4] Routine name: transaksi4
+    (Modifikasi ROLLBACK sesuai Gambar 19 Modul UT -> INSERT ID 7 di-ROLLBACK,
+     lalu UPDATE ID 3 menjadi Septin di-COMMIT)
+
+BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (7, 'Rudi', 'Jl. Kebon Jeruk No. 14', 'L');
+ROLLBACK;
+UPDATE pasien
+SET nama_pasien = 'Septin'
+WHERE id_pasien = 3;
+COMMIT;
+SELECT * FROM pasien;
+END
+
+
+[5] Routine name: transaksi5
+    (SAVEPOINT point1 & ROLLBACK TO point1 -> ID 8 Dudung disimpan sebelum point1,
+     ID 9 Maman dibatalkan oleh ROLLBACK TO point1, ID 10 Ujang disimpan dengan COMMIT)
+
+BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (8, 'Dudung', 'Jl. Cimahi No. 11', 'L');
+SAVEPOINT point1;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (9, 'Maman', 'Jl. Garut No. 5', 'L');
+ROLLBACK TO point1;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (10, 'Ujang', 'Jl. Tasikmalaya No. 9', 'L');
+COMMIT;
+SELECT * FROM pasien;
+END
+
+
+--------------------------------------------------------------------------------
+BAGIAN 2: MEMBUAT TABEL OBAT, TRANSAKSI_OBAT, RELASI DESIGNER, DAN TRIGGER
+--------------------------------------------------------------------------------
+Buka database `rumah_sakit` -> Klik tab `SQL` -> Copy-Paste perintah pembuatan
+tabel `obat` dan `transaksi_obat` berikut, lalu klik `Go`:
+
+CREATE TABLE obat (
+  id_obat INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  kode_obat VARCHAR(5) NOT NULL,
+  nama_obat VARCHAR(30) NOT NULL,
+  harga INT(10) NOT NULL,
+  stok INT(5) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE transaksi_obat (
+  id_transaksi INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_pasien INT(3) NOT NULL,
+  id_obat INT(6) NOT NULL,
+  jumlah INT(5) NOT NULL,
+  total_harga INT(10) NOT NULL,
+  INDEX (id_pasien),
+  INDEX (id_obat)
+) ENGINE=InnoDB;
+
+
+--> LANGKAH DI LAYAR (Persis Video Contoh):
+1. Klik database `rumah_sakit` -> Klik tab `More` -> `Designer`.
+2. Klik ikon `Create relationship`:
+   - Klik primary key `id_pasien` di tabel `pasien`, lalu klik foreign key `id_pasien` di `transaksi_obat` (Pilih ON DELETE: CASCADE, ON UPDATE: CASCADE -> Klik OK).
+   - Klik primary key `id_obat` di tabel `obat`, lalu klik foreign key `id_obat` di `transaksi_obat` (Pilih ON DELETE: CASCADE, ON UPDATE: CASCADE -> Klik OK).
+3. Isi data awal tabel `obat` (Klik tab `SQL` pada tabel `obat` lalu copas ini):
+
+INSERT INTO obat (id_obat, kode_obat, nama_obat, harga, stok) VALUES
+(1, 'A001', 'Paracetamol', 5000, 100),
+(2, 'A002', 'Amoxicillin', 10000, 50),
+(3, 'A003', 'Betadine', 15000, 100);
+
+4. Buat Trigger pengurang stok obat:
+   - Klik tabel `transaksi_obat` -> Klik tab `Triggers` di bagian atas -> Klik `Create new trigger`:
+     * Trigger name : tg_stok_obat (atau tr_beli)
+     * Table        : transaksi_obat
+     * Time         : AFTER
+     * Event        : INSERT
+     * Definition   : (Copy-Paste baris di bawah ini)
+
+UPDATE obat SET stok = stok - NEW.jumlah WHERE id_obat = NEW.id_obat
+
+   - Klik `Go`.
+5. Uji Trigger:
+   - Klik tabel `transaksi_obat` -> Klik tab `Insert`:
+     * id_pasien   : 6 (Hanif)
+     * id_obat     : 1 (Paracetamol)
+     * jumlah      : 15
+     * total_harga : 75000
+     Klik `Go`.
+   - Klik tabel `obat` -> Tunjukkan stok Paracetamol berkurang dari 100 menjadi 85!
+
+
+--------------------------------------------------------------------------------
+BAGIAN 3: PRAKTIKUM BASIS DATA TERDISTRIBUSI (REPLIKASI MASTER WINDOWS -> SLAVE UBUNTU)
+--------------------------------------------------------------------------------
+[LANGKAH 1 - DI MASTER WINDOWS (phpMyAdmin + XAMPP)]
+1. Klik logo rumah (Home phpMyAdmin) -> Klik tab `User accounts` -> Klik `Add user account`:
+   - User name : subhan (atau repl_user)
+   - Host name : Any host (%)
+   - Password  : 1234
+   - Di bawah bagian `Administration`: Centang `Replication client` dan `Replication slave`.
+   - Klik `Go`.
+
+2. Klik tab `Replication` (di menu atas Home phpMyAdmin):
+   - Pada kotak `Primary replication`, klik link `configure`.
+   - Pilih `Ignore all databases; Replicate:` -> pilih `rumah_sakit`.
+   - Copy baris konfigurasi yang muncul di layar:
+     log-bin=mysql-bin
+     server-id=1
+     binlog-do-db=rumah_sakit
+   - Buka XAMPP Control Panel -> pada baris MySQL klik `Config` -> pilih `my.ini`.
+   - Cari `[mysqld]`, tempelkan ketiga baris tadi di bawah `[mysqld]`.
+   - Cari baris `server-id = 1` bawaan di bawahnya, beri tanda pagar `#server-id = 1` agar tidak duplikat.
+   - Tekan Ctrl+S (Save) lalu tutup Notepad `my.ini`.
+   - Di XAMPP Control Panel: Klik `Stop` pada MySQL, tunggu 2 detik, klik `Start` lagi.
+   - Kembali ke browser phpMyAdmin Windows -> klik `Go`.
+   - Klik `Show primary status` -> Catat nama `File` (contoh: `mysql-bin.000001`) dan `Position` (contoh: `328` atau `342`).
+
+3. Export Database `rumah_sakit`:
+   - Klik database `rumah_sakit` di panel kiri -> klik tab `Export` -> klik `Export` / `Go`.
+   - Simpan file `rumah_sakit.sql` dan kirim ke Ubuntu (bisa lewat Google Drive / OneDrive / Shared Folder VirtualBox).
+
+4. Cek IP & Koneksi Ping (Windows <-> Ubuntu):
+   - Di VirtualBox: Pastikan Settings -> Network -> Adapter 1 menggunakan `Host-Only Adapter` (atau `Bridged Adapter`).
+   - Buka CMD di Windows, ketik: `ipconfig` (Catat IPv4 Windows, misal `192.168.56.1`).
+   - Buka Terminal di Ubuntu, ketik: `ip a` (Catat IPv4 Ubuntu, misal `192.168.56.101`).
+   - Di CMD Windows ketik: `ping 192.168.56.101`
+   - Di Terminal Ubuntu ketik: `ping 192.168.56.1`
+
+
+[LANGKAH 2 - DI SLAVE UBUNTU (VirtualBox)]
+1. Nyalakan XAMPP di Terminal Ubuntu:
+   sudo /opt/lampp/lampp start
+   sudo /opt/lampp/bin/mysql_upgrade -u root --force
+
+2. Buka Firefox di Ubuntu -> ketik `http://localhost/phpmyadmin`:
+   - Klik `New` -> buat database `rumah_sakit` -> klik `Create`.
+   - Klik tab `Import` -> pilih file `rumah_sakit.sql` tadi -> klik `Import` / `Go`.
+
+3. Konfigurasi `my.cnf` di Ubuntu:
+   - Buka Terminal Ubuntu, jalankan:
+     sudo chmod a+rwx /opt/lampp/etc/my.cnf
+     sudo nano /opt/lampp/etc/my.cnf
+   - Cari `[mysqld]`, beri tanda pagar `#` pada `server-id = 1`, lalu tambahkan:
+     server-id = 2
+     replicate-do-db = rumah_sakit
+   - Simpan (Ctrl+O, Enter, Ctrl+X), lalu kembalikan permission dan restart MySQL:
+     sudo chmod 644 /opt/lampp/etc/my.cnf
+     sudo /opt/lampp/lampp restart
+
+4. Hubungkan Slave Ubuntu ke Master Windows:
+   - Buka tab `SQL` di halaman utama phpMyAdmin Ubuntu (atau lewat `/opt/lampp/bin/mysql -u root`),
+     lalu Copy-Paste perintah ini (sesuaikan IP Windows, File, dan Position dari Master):
+
+STOP SLAVE;
+CHANGE MASTER TO
+  MASTER_HOST='192.168.56.1',
+  MASTER_USER='subhan',
+  MASTER_PASSWORD='1234',
+  MASTER_LOG_FILE='mysql-bin.000001',
+  MASTER_LOG_POS=328;
+START SLAVE;
+
+   - Klik `Go`.
+   - Buka tab `Replication` di phpMyAdmin Ubuntu -> klik `See slave status table` (atau `See replica status table`).
+   - Tunjukkan baris `Slave_IO_Running: Yes` dan `Slave_SQL_Running: Yes`!
+
+5. Pembuktian Sinkronisasi Real-Time (Master Windows -> Slave Ubuntu):
+   - Di phpMyAdmin Windows (Master), buka tabel `transaksi_obat` -> klik `Insert`:
+     * id_pasien   : 8 (Dudung)
+     * id_obat     : 3 (Betadine, stok awal 100)
+     * jumlah      : 25
+     * total_harga : 375000
+     Klik `Go`.
+   - Tunjukkan di tabel `obat` Windows: stok Betadine berkurang dari 100 menjadi 75.
+   - Pindah ke jendela Ubuntu (Slave), klik `Browse` / Refresh pada tabel `transaksi_obat` dan `obat`:
+     * Transaksi pembelian 25 Betadine otomatis muncul di Ubuntu!
+     * Stok Betadine di Ubuntu otomatis berubah menjadi 75!
+================================================================================
