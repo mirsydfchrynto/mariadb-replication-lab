@@ -22,8 +22,6 @@ echo       - Otomatis download ^& install: (1) yEd Graph Editor, (2) XAMPP v8.2.
 echo         (3) Oracle VirtualBox, dan (4) File ISO Linux Ubuntu (20.04 / 24.04)
 echo       - Otomatis membuat VM Ubuntu di VirtualBox (RAM 4GB, Disk 25GB, NAT + Host-Only)
 echo.
-echo   PILIH MODE PENGERJAAN DI LAPTOP WINDOWS INI:
-echo.
 echo   [1] PERSIAPAN REKAM DARI DASAR (BEST PRACTICE - PALING DISARANKAN)
 echo       - Membuka Firewall Windows (Port 3306 ^& Ping ICMP) agar Ubuntu pasti konek
 echo       - Menyalakan XAMPP Control Panel (Apache ^& MySQL)
@@ -55,8 +53,6 @@ goto MENU
 :MODE_INSTALL_SOFTWARE
 powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT_DIR%0-INSTALL-SOFTWARE-WAJIB-WINDOWS.ps1"
 pause
-goto MENU
-if "%PILIH%"=="0" exit /b 0
 goto MENU
 
 :BUKA_FIREWALL_DAN_XAMPP
