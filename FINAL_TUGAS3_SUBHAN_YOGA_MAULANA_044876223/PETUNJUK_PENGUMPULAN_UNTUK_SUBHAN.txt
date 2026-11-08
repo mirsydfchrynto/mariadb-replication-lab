@@ -1,0 +1,58 @@
+================================================================================
+  PETUNJUK PENGUMPULAN TUGAS 3 BASIS DATA (MSIM4206) - SUBHAN YOGA MAULANA (044876223)
+================================================================================
+
+Folder ini berisi seluruh paket tugas yang sudah disusun 100% lengkap dan sesuai
+dengan instruksi Dosen, Buku Materi Pokok (BMP), serta Modul Praktikum resmi UT.
+
+--------------------------------------------------------------------------------
+ISI FOLDER INI:
+--------------------------------------------------------------------------------
+1. [01_VIDEO_DOKUMENTER]
+   File: VIDEO_DOKUMENTER_PRAKTIKUM_TUGAS3_SUBHAN_YOGA_MAULANA_044876223.mp4
+   - Durasi : 13 Menit 33 Detik (25.00 FPS, 1280x720, MP4 H.264)
+   - Status : Murni TANPA SUARA (Silent), siap langsung diisi suara asli Subhan.
+   - Isi    : Lengkap dari nol! Dimulai dari perancangan diagram ERD di yEd Graph
+              Editor, menyalakan Apache & MySQL di XAMPP Windows, phpMyAdmin
+              (transaksi1 s/d transaksi5, tabel obat, Foreign Key, Trigger),
+              Notepad my.ini, VirtualBox Host-Only Adapter, uji live Ping 2 arah,
+              hingga XAMPP Linux Ubuntu dan verifikasi Replikasi Slave Yes/Yes.
+   - Kursor : 100% presisi menggunakan koordinat asli tombol (DOM bounding box)
+              dengan kursor panah standar Windows 11 (aero_arrow).
+
+2. [02_NASKAH_BACAAN]
+   File: NASKAH_BACAAN_PRAKTIKUM_SUBHAN_044876223.txt (dan .md)
+   - Berisi penunjuk waktu menit [MM:SS] yang sinkron persis dengan gerakan video
+     dari detik ke detik untuk dibaca saat melakukan dubbing suara.
+
+3. [03_LAPORAN_PRAKTIKUM_FINAL]
+   File: TUGAS_3_SUBHAN YOGA MAULANA_044876223.docx & .pdf
+   - Format dan gaya penulisan sama persis dengan Tugas 2 milik Subhan.
+   - Terdiri dari 24 Halaman dengan 39 Gambar bukti nyata dari awal sampai akhir.
+
+4. [04_ASET_DAN_SKRIP_PENDUKUNG]
+   - skema_rumah_sakit.graphml (File ERD asli untuk yEd Graph Editor)
+   - 00_persiapan_tugas2.sql & 01_full_transaksi_dan_trigger.sql
+   - START-HERE.bat & PANDUAN-AWAM-STEP-BY-STEP.html
+
+--------------------------------------------------------------------------------
+LANGKAH PENGUMPULAN TUGAS OLEH SUBHAN YOGA MAULANA (3 LANGKAH MUDAH):
+--------------------------------------------------------------------------------
+Langkah 1: Isi Suara Asli (Dubbing)
+- Buka video di folder `01_VIDEO_DOKUMENTER` menggunakan CapCut / Premiere / HP.
+- Rekam suara Subhan membaca kalimat pada file `02_NASKAH_BACAAN` sesuai menit [MM:SS].
+- (Opsional tetapi sangat bagus): Tempelkan rekaman webcam wajah Subhan di sudut
+  layar saat menit 00:00 (perkenalan) dan menit 12:40 (penutup).
+- Export video hasil gabungannya.
+
+Langkah 2: Upload Video ke YouTube
+- Buka https://youtube.com -> Login akun Subhan -> Klik Buat (+) -> Upload Video.
+- Beri Judul: Tugas 3 Praktik Basis Data MSIM4206 - Subhan Yoga Maulana - 044876223
+- Pilih Visibilitas: "Tidak Publik" (Unlisted) atau "Publik" (Public).
+- Salin (Copy) link video YouTube tersebut.
+
+Langkah 3: Tempel Link ke Laporan Word & Kirim ke e-Learning UT
+- Buka file `03_LAPORAN_PRAKTIKUM_FINAL\TUGAS_3_SUBHAN YOGA MAULANA_044876223.docx`.
+- Pada Halaman 1, tempelkan link YouTube tadi ke dalam kotak tabel "Link Youtube".
+- Simpan (Ctrl+S) atau Save as PDF, lalu upload file laporan tersebut ke e-Learning UT.
+================================================================================

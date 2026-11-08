@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:y="http://www.yworks.com/xml/graphml"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <key for="edge" id="d10" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <node id="n0">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="130.0" width="180.0" x="80.0" y="80.0"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:NodeLabel alignment="center" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="bold">pasien</y:NodeLabel>
+          <y:NodeLabel alignment="left" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="11">+ id_pasien : INT(3) [PK]
++ nama_pasien : VARCHAR(30)
++ alamat_pasien : VARCHAR(100)
++ jenis_kelamin : VARCHAR(1)</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="145.0" width="190.0" x="360.0" y="80.0"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:NodeLabel alignment="center" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="bold">transaksi_obat</y:NodeLabel>
+          <y:NodeLabel alignment="left" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="11">+ id_transaksi : INT(6) [PK]
++ id_pasien : INT(3) [FK]
++ id_obat : INT(6) [FK]
++ jumlah : INT(5)
++ total_harga : INT(10)</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n2">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="145.0" width="180.0" x="650.0" y="80.0"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:NodeLabel alignment="center" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="bold">obat</y:NodeLabel>
+          <y:NodeLabel alignment="left" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="11">+ id_obat : INT(6) [PK]
++ kode_obat : VARCHAR(5)
++ nama_obat : VARCHAR(30)
++ harga : INT(10)
++ stok : INT(5)</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n3">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="160.0" width="190.0" x="80.0" y="290.0"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:NodeLabel alignment="center" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="bold">dokter</y:NodeLabel>
+          <y:NodeLabel alignment="left" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="11">+ id_dokter : INT(3) [PK]
++ nama_dokter : VARCHAR(30)
++ alamat_dokter : VARCHAR(100)
++ tanggal_lahir : DATE
++ no_hp : VARCHAR(15)
++ spesialis : VARCHAR(15)
++ waktu_kerja : VARCHAR(100)</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n4">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="130.0" width="190.0" x="360.0" y="290.0"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:NodeLabel alignment="center" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="bold">pasien_dokter</y:NodeLabel>
+          <y:NodeLabel alignment="left" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="11">+ id : INT(3) [PK]
++ id_dokter : INT(3) [FK]
++ id_pasien : INT(3) [FK]
++ waktu_periksa : DATETIME
++ resep : VARCHAR(100)</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n5">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="120.0" width="180.0" x="650.0" y="290.0"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:NodeLabel alignment="center" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="bold">administrator</y:NodeLabel>
+          <y:NodeLabel alignment="left" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="11">+ id_admin : INT(3) [PK]
++ nama_admin : VARCHAR(30)
++ waktu_jaga : VARCHAR(100)</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <edge id="e0" source="n0" target="n1">
+      <data key="d10"><y:PolyLineEdge><y:Arrows source="crows_foot_one" target="crows_foot_many"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e1" source="n2" target="n1">
+      <data key="d10"><y:PolyLineEdge><y:Arrows source="crows_foot_one" target="crows_foot_many"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e2" source="n0" target="n4">
+      <data key="d10"><y:PolyLineEdge><y:Arrows source="crows_foot_one" target="crows_foot_many"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e3" source="n3" target="n4">
+      <data key="d10"><y:PolyLineEdge><y:Arrows source="crows_foot_one" target="crows_foot_many"/></y:PolyLineEdge></data>
+    </edge>
+  </graph>
+</graphml>

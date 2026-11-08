@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panduan Step-by-Step dari Dasar (Windows + VirtualBox Ubuntu)</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+    --accent: #38bdf8;
+    --ok: #34d399;
+    --warn: #fbbf24;
+    --text: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 24px 20px 100px;
+  }
+  .container { max-width: 980px; margin: 0 auto; }
+  h1, h2, h3 { color: #fff; margin-top: 0; }
+  .hero {
+    background: linear-gradient(135deg, #1e3a8a, #0f172a);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    display: inline-block;
+    background: var(--accent);
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .action-box {
+    background: rgba(56, 189, 248, 0.1);
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .voice-box {
+    background: rgba(52, 211, 153, 0.1);
+    border-left: 4px solid var(--ok);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 17px;
+  }
+  pre {
+    background: #090d16;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 14px;
+    overflow-x: auto;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    color: #e2e8f0;
+    position: relative;
+  }
+  .copy-btn {
+    background: var(--ok);
+    color: #0f172a;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 6px;
+  }
+  .copy-btn:active { transform: scale(0.97); }
+  ol, ul { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  code {
+    background: #090d16;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fde68a;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>Panduan Praktikum Step-by-Step dari Dasar (Windows & VirtualBox Ubuntu)</h1>
+    <p>Ikuti urutan dari <strong>Langkah 0</strong> sampai <strong>Langkah 16</strong> di bawah ini dengan santai (tempo pelan, target total durasi rekaman <strong>25–35 menit</strong> seperti contoh pengumpulan mahasiswa UT). Setiap kotak kode memiliki tombol <strong>[Copy Kode]</strong> sehingga Anda tinggal klik tombol tersebut lalu tekan <code>Ctrl + V</code> di phpMyAdmin tanpa risiko salah ketik.</p>
+  </div>
+
+  <!-- TAHAP PRA-PRAKTIKUM: 4 SOFTWARE WAJIB DOSEN -->
+  <div class="step-card">
+    <span class="step-num">Tahap Persiapan Wajib — Instalasi 4 Software Sesuai Arahan Dosen & Video Tutorial (QfTBsFqXXOw)</span>
+    <div class="action-box">
+      <strong>4 Kebutuhan Software Wajib Mata Kuliah Basis Data (MSIM4206):</strong>
+      <ol>
+        <li><strong>Aplikasi yEd Graph Editor</strong>: <a href="https://www.yworks.com/products/yed" target="_blank" style="color:#38bdf8;">https://www.yworks.com/products/yed</a> (File skema siap buka sudah disediakan di <code>erd\skema_rumah_sakit.graphml</code>).</li>
+        <li><strong>Aplikasi XAMPP (Versi Sama di Windows & Ubuntu: PHP 8.2 / v8.2.12)</strong>: <a href="https://www.apachefriends.org/download.html" target="_blank" style="color:#38bdf8;">https://www.apachefriends.org/download.html</a></li>
+        <li><strong>Aplikasi Oracle VirtualBox</strong>: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" style="color:#38bdf8;">https://www.virtualbox.org/wiki/Downloads</a></li>
+        <li><strong>File ISO Linux Ubuntu Desktop</strong>:
+          <ul>
+            <li>Ubuntu 20.04 LTS (Focal): <a href="https://releases.ubuntu.com/focal/" target="_blank" style="color:#38bdf8;">https://releases.ubuntu.com/focal/</a></li>
+            <li>Ubuntu 24.04.3 LTS: <a href="https://ubuntu.com/download/desktop/thank-you?version=24.04.3&architecture=amd64&lts=true" target="_blank" style="color:#38bdf8;">Download Ubuntu 24.04.3 LTS</a></li>
+          </ul>
+        </li>
+      </ol>
+      <p><strong>💡 Cara Otomatis (1-Klik dari <code>START-HERE.bat</code>):</strong><br>
+      Pilih <strong>Menu <code>[0]</code></strong> pada <code>START-HERE.bat</code>. Skrip akan mengunduh & menginstal yEd, XAMPP v8.2.12, VirtualBox, dan ISO Ubuntu, lalu otomatis membuatkan Virtual Machine bernama <code>Linux-Ubuntu-BasisData</code> (RAM 4096 MB, Disk 25 GB, Adapter 1 = NAT, Adapter 2 = Host-Only Adapter).</p>
+      <p><strong>💡 Cara Install XAMPP di Dalam Ubuntu VirtualBox (Sesuai Video Tutorial Dosen <code>QfTBsFqXXOw</code>):</strong><br>
+      Setelah Ubuntu selesai diinstal di VirtualBox dan masuk ke Desktop Ubuntu, buka <strong>Terminal</strong> di Ubuntu lalu jalankan perintah ini (otomatis mengunduh XAMPP Linux <code>8.2.12</code> yang persis sama versinya dengan Windows, menjalankan <code>chmod 755</code>, menginstal ke <code>/opt/lampp</code>, dan membuka <code>manager-linux-x64.run</code>):</p>
+      <button class="copy-btn" onclick="copyCode('c-init-ubu', this)">📋 Copy Perintah Install XAMPP di Terminal Ubuntu</button>
+      <pre id="c-init-ubu">curl -fsSL https://raw.githubusercontent.com/mirsydfchrynto/mariadb-replication-lab/main/ubuntu-install-xampp-dan-slave.sh | sudo bash</pre>
+      <p>Atau jika sudah mengunduh <code>xampp-linux-x64-8.2.12-0-installer.run</code> lewat Firefox Ubuntu di folder <code>Downloads</code> (persis di menit 09:38 video tutorial dosen):</p>
+      <button class="copy-btn" onclick="copyCode('c-man-ubu', this)">📋 Copy Perintah Manual Sesuai Video Tutorial Dosen</button>
+      <pre id="c-man-ubu">cd ~/Downloads
+chmod 755 xampp-linux-*-installer.run
+sudo ./xampp-linux-*-installer.run
+cd /opt/lampp
+sudo chmod +x manager-linux-x64.run
+sudo ./manager-linux-x64.run</pre>
+    </div>
+  </div>
+
+  <!-- LANGKAH 0 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 0 — Persiapan Sebelum Klik "Start Recording" di OBS</span>
+    <div class="action-box">
+      <strong>Apa yang dilakukan sebelum mulai rekam:</strong>
+      <ol>
+        <li>Pastikan Anda sudah menjalankan <code>START-HERE.bat</code> &rarr; pilih <strong>Menu [1]</strong> (otomatis menyalakan XAMPP, membuka Firewall Windows agar ping Ubuntu tidak gagal, dan mengisi database <code>rumah_sakit</code> dengan 6 tabel awal Tugas 2).</li>
+        <li>Nyalakan VirtualBox dan jalankan mesin virtual <strong>Ubuntu</strong> Anda sampai masuk ke desktop Ubuntu.</li>
+        <li>Buka aplikasi <strong>yEd Graph Editor</strong> (jika ingin memperlihatkan skema relasi di awal), lalu buka file <code>erd\skema_rumah_sakit.graphml</code> di dalam folder ini.</li>
+        <li>Buka <strong>OBS Studio</strong> (atau tekan <code>Win + G</code>), rekam layar penuh (<em>Display Capture</em>), lalu mulai bicara dengan santai mengikuti kotak hijau di bawah.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- LANGKAH 1 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 1 — Perkenalan & Menyalakan XAMPP di Desktop Windows</span>
+    <div class="action-box">
+      <strong>🖱 Aksi di Layar Windows:</strong>
+      <ol>
+        <li>Perlihatkan Desktop Windows & jendela <strong>XAMPP Control Panel</strong> (pastikan indikator <code>Apache</code> dan <code>MySQL</code> berwarna hijau / klik <code>Start</code>).</li>
+        <li>(Opsional) Perlihatkan sebentar skema tabel di aplikasi <strong>yEd Graph Editor</strong> (file <code>erd\skema_rumah_sakit.graphml</code>).</li>
+        <li>Buka browser Chrome/Edge, ketik <code>http://localhost/phpmyadmin</code>, lalu klik database <strong><code>rumah_sakit</code></strong> di sebelah kiri.</li>
+        <li>Klik tabel <strong><code>pasien</code></strong> untuk memperlihatkan 5 baris data pasien awal dari Tugas 2.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan (Santai & Pelan):</strong><br>
+      "Assalamualaikum warahmatullahi wabarakatuh. Perkenalkan nama saya Subhan Yoga Maulana, dengan NIM 044876223, dari Program Studi Sistem Informasi Universitas Terbuka. Pada video ini saya akan mempraktikkan Tugas 3 Mata Kuliah Basis Data, yang terdiri dari dua praktikum: pertama Praktikum Transaksi, dan kedua Praktikum Basis Data Terdistribusi menggunakan Replikasi Master-Slave dari Windows ke Linux Ubuntu di VirtualBox. Pertama-tama saya sudah menyalakan service Apache dan MySQL pada XAMPP Control Panel di Windows, kemudian membuka localhost/phpmyadmin dan memilih database rumah_sakit yang melanjutkan tabel dari Tugas 2. Di sini seluruh tabel sudah menggunakan storage engine InnoDB, dan pada tabel pasien terdapat 5 data pasien awal dengan ID 1 sampai 5."
+    </div>
+  </div>
+
+  <!-- LANGKAH 2 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 2 — Membuat Routine <code>transaksi1</code> (START TRANSACTION Tanpa COMMIT)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Pastikan sedang berada di dalam database <code>rumah_sakit</code>.</li>
+        <li>Klik tab <strong><code>Routines</code></strong> di deretan menu atas (jika tidak terlihat, klik <code>More</code> &rarr; <code>Routines</code>).</li>
+        <li>Klik tombol <strong><code>Create new routine</code></strong> (atau <code>Add routine</code>).</li>
+        <li>Pada kotak <strong>Routine name</strong>, ketik: <code>transaksi1</code></li>
+        <li>Pada bagian <strong>Parameters</strong>, klik tombol <strong><code>Drop</code></strong> di sebelah kanan agar baris parameter terhapus.</li>
+        <li>Klik tombol <strong>Copy Kode</strong> di bawah ini, lalu tempelkan (<code>Ctrl + V</code>) ke dalam kotak besar <strong>Definition</strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-t1', this)">📋 Copy Kode transaksi1</button>
+      <pre id="c-t1">BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (6, 'Hanif', 'Jl. Babakan Loa No. 22', 'L');
+SELECT * FROM pasien;
+END</pre>
+      <ol start="7">
+        <li>Scroll ke paling bawah jendela pop-up, klik tombol <strong><code>Go</code></strong>.</li>
+        <li>Setelah <code>transaksi1</code> muncul di daftar Routines, klik tombol <strong><code>Execute</code></strong> pada baris <code>transaksi1</code>. Tunjuk bahwa data ID 6 (Hanif) muncul di hasil eksekusi.</li>
+        <li>Sekarang klik tabel <strong><code>pasien</code></strong> di panel kiri: tunjukkan bahwa jumlah data masih tetap 5 baris (data Hanif belum masuk permanen karena belum ada perintah <code>COMMIT</code>).</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Kita mulai dengan membuka menu Routines lalu klik Create new routine. Untuk routine pertama kita beri nama transaksi1, lalu parameternya kita drop. Pada bagian Definition, kita memulai transaksi dengan START TRANSACTION, menyisipkan data pasien ID 6 bernama Hanif tanpa perintah COMMIT, lalu menampilkan tabel pasien dan ditutup dengan END. Kita klik Go lalu klik Execute. Di sini data Hanif muncul pada hasil eksekusi sementara. Namun ketika kita cek langsung tabel pasien di menu Browse, data Hanif belum tersimpan secara permanen karena belum dilakukan perintah COMMIT."
+    </div>
+  </div>
+
+  <!-- LANGKAH 3 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 3 — Membuat Routine <code>transaksi2</code> (Dengan Perintah COMMIT)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Klik kembali database <code>rumah_sakit</code> &rarr; tab <strong><code>Routines</code></strong> &rarr; klik <strong><code>Create new routine</code></strong>.</li>
+        <li>Isi <strong>Routine name</strong>: <code>transaksi2</code></li>
+        <li>Klik tombol <strong><code>Drop</code></strong> pada baris Parameters.</li>
+        <li>Klik tombol <strong>Copy Kode</strong> di bawah ini, lalu tempelkan (<code>Ctrl + V</code>) ke kotak <strong>Definition</strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-t2', this)">📋 Copy Kode transaksi2</button>
+      <pre id="c-t2">BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (6, 'Hanif', 'Jl. Babakan Loa No. 22', 'L');
+COMMIT;
+SELECT * FROM pasien;
+END</pre>
+      <ol start="5">
+        <li>Klik <strong><code>Go</code></strong>, lalu klik <strong><code>Execute</code></strong> pada <code>transaksi2</code>.</li>
+        <li>Klik tabel <strong><code>pasien</code></strong> di panel kiri: tunjukkan bahwa data ID 6 (Hanif) kini sudah tersimpan permanen di tabel <code>pasien</code>.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Selanjutnya kita buat routine kedua bernama transaksi2, parameternya kita drop, dan pada Definition kita tambahkan perintah COMMIT setelah INSERT. Kita klik Go lalu kita klik Execute pada transaksi2. Ketika kita periksa kembali tabel pasien, kini data pasien ID 6 atas nama Hanif sudah tersimpan secara permanen di dalam tabel pasien."
+    </div>
+  </div>
+
+  <!-- LANGKAH 4 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 4 — Membuat Routine <code>transaksi3</code> (Perintah ROLLBACK)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Buka tab <strong><code>Routines</code></strong> &rarr; klik <strong><code>Create new routine</code></strong>.</li>
+        <li>Isi <strong>Routine name</strong>: <code>transaksi3</code>, lalu klik <strong><code>Drop</code></strong> pada Parameters.</li>
+        <li>Copy kode di bawah ini ke kotak <strong>Definition</strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-t3', this)">📋 Copy Kode transaksi3</button>
+      <pre id="c-t3">BEGIN
+START TRANSACTION;
+UPDATE pasien
+SET nama_pasien = 'Septin'
+WHERE id_pasien = 3;
+ROLLBACK;
+COMMIT;
+SELECT * FROM pasien;
+END</pre>
+      <ol start="4">
+        <li>Klik <strong><code>Go</code></strong>, lalu klik <strong><code>Execute</code></strong> pada <code>transaksi3</code>.</li>
+        <li>Tunjukkan bahwa pasien ID 3 tetap bernama <code>Budi Raharjo</code> (tidak berubah menjadi <code>Septin</code> karena adanya perintah <code>ROLLBACK</code>).</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Berikutnya kita membuat routine transaksi3 untuk mempraktikkan perintah ROLLBACK. Di sini kita mencoba mengubah nama pasien pada ID 3 menjadi Septin, namun diikuti perintah ROLLBACK. Saat kita simpan dan klik Execute, terlihat nama pasien ID 3 tetap Budi Raharjo karena perubahan tersebut telah dibatalkan oleh perintah ROLLBACK."
+    </div>
+  </div>
+
+  <!-- LANGKAH 5 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 5 — Membuat Routine <code>transaksi4</code> (Modifikasi ROLLBACK & COMMIT Sesuai Modul)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Buka tab <strong><code>Routines</code></strong> &rarr; klik <strong><code>Create new routine</code></strong>.</li>
+        <li>Isi <strong>Routine name</strong>: <code>transaksi4</code>, lalu klik <strong><code>Drop</code></strong> pada Parameters.</li>
+        <li>Copy kode di bawah ini ke kotak <strong>Definition</strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-t4', this)">📋 Copy Kode transaksi4</button>
+      <pre id="c-t4">BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (7, 'Rudi', 'Jl. Kebon Jeruk No. 14', 'L');
+ROLLBACK;
+UPDATE pasien
+SET nama_pasien = 'Septin'
+WHERE id_pasien = 3;
+COMMIT;
+SELECT * FROM pasien;
+END</pre>
+      <ol start="4">
+        <li>Klik <strong><code>Go</code></strong>, lalu klik <strong><code>Execute</code></strong> pada <code>transaksi4</code>.</li>
+        <li>Klik tabel <strong><code>pasien</code></strong>: tunjukkan bahwa ID 7 (Rudi) batal masuk karena di-ROLLBACK, sedangkan ID 3 kini resmi berubah menjadi <code>Septin</code> karena di-COMMIT.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Selanjutnya pada transaksi4 sesuai modul praktikum, kita menyisipkan pasien baru ID 7 bernama Rudi lalu kita ROLLBACK, kemudian kita lakukan UPDATE nama pasien ID 3 menjadi Septin lalu kita COMMIT. Setelah kita klik Execute dan melihat tabel pasien, data ID 7 batal masuk karena ROLLBACK, sedangkan nama pasien ID 3 berhasil berubah menjadi Septin karena disahkan oleh COMMIT."
+    </div>
+  </div>
+
+  <!-- LANGKAH 6 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 6 — Membuat Routine <code>transaksi5</code> (SAVEPOINT point1 & ROLLBACK TO point1)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Buka tab <strong><code>Routines</code></strong> &rarr; klik <strong><code>Create new routine</code></strong>.</li>
+        <li>Isi <strong>Routine name</strong>: <code>transaksi5</code>, lalu klik <strong><code>Drop</code></strong> pada Parameters.</li>
+        <li>Copy kode di bawah ini ke kotak <strong>Definition</strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-t5', this)">📋 Copy Kode transaksi5</button>
+      <pre id="c-t5">BEGIN
+START TRANSACTION;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (8, 'Dudung', 'Jl. Cimahi No. 11', 'L');
+SAVEPOINT point1;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (9, 'Maman', 'Jl. Garut No. 5', 'L');
+ROLLBACK TO point1;
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `jenis_kelamin`)
+VALUES (10, 'Ujang', 'Jl. Tasikmalaya No. 9', 'L');
+COMMIT;
+SELECT * FROM pasien;
+END</pre>
+      <ol start="4">
+        <li>Klik <strong><code>Go</code></strong>, lalu klik <strong><code>Execute</code></strong> pada <code>transaksi5</code>.</li>
+        <li>Klik tabel <strong><code>pasien</code></strong>: tunjukkan bahwa ID 8 (Dudung) dan ID 10 (Ujang) masuk ke tabel, sedangkan ID 9 (Maman) batal masuk karena terkena <code>ROLLBACK TO point1</code>.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Berikutnya kita membuat routine transaksi5 untuk menguji SAVEPOINT. Kita menambahkan pasien ID 8 bernama Dudung, lalu membuat SAVEPOINT point1. Setelah itu kita menambahkan ID 9 bernama Maman, namun kita batalkan ke titik point1 menggunakan ROLLBACK TO point1, dilanjutkan menambah ID 10 bernama Ujang dan COMMIT. Hasilnya pada tabel pasien: ID 8 Dudung dan ID 10 Ujang berhasil tersimpan, sedangkan ID 9 Maman dibatalkan karena kembali ke titik point1."
+    </div>
+  </div>
+
+  <!-- LANGKAH 7 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 7 — Membuat Tabel <code>obat</code> & <code>transaksi_obat</code> Beserta Relasi Designer</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Klik database <code>rumah_sakit</code> di panel kiri &rarr; klik tab <strong><code>SQL</code></strong> di bagian atas.</li>
+        <li>Copy kode di bawah ini ke kotak SQL lalu klik <strong><code>Go</code></strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-tbl', this)">📋 Copy Kode Buat Tabel obat & transaksi_obat + Stok Awal</button>
+      <pre id="c-tbl">CREATE TABLE obat (
+  id_obat INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  kode_obat VARCHAR(5) NOT NULL,
+  nama_obat VARCHAR(30) NOT NULL,
+  harga INT(10) NOT NULL,
+  stok INT(5) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE transaksi_obat (
+  id_transaksi INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_pasien INT(3) NOT NULL,
+  id_obat INT(6) NOT NULL,
+  jumlah INT(5) NOT NULL,
+  total_harga INT(10) NOT NULL,
+  INDEX (id_pasien),
+  INDEX (id_obat),
+  CONSTRAINT fk_to_pasien FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_to_obat FOREIGN KEY (id_obat) REFERENCES obat(id_obat) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+INSERT INTO obat (id_obat, kode_obat, nama_obat, harga, stok) VALUES
+(1, 'A001', 'Paracetamol', 5000, 100),
+(2, 'A002', 'Amoxicillin', 10000, 50),
+(3, 'A003', 'Betadine', 15000, 100);</pre>
+      <ol start="3">
+        <li>Klik database <code>rumah_sakit</code> &rarr; klik tab <strong><code>More</code> &rarr; <code>Designer</code></strong> untuk memperlihatkan garis relasi antara <code>pasien</code>, <code>transaksi_obat</code>, dan <code>obat</code>.</li>
+        <li>Klik tabel <strong><code>obat</code></strong> di panel kiri untuk memperlihatkan stok awal: Paracetamol = 100, Amoxicillin = 50, Betadine = 100.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Selanjutnya untuk mempraktikkan Trigger, kita membuat dua tabel tambahan yaitu tabel obat dan tabel transaksi_obat yang berelasi Foreign Key CASCADE dengan tabel pasien, serta mengisi tiga data obat awal yaitu Paracetamol dengan stok 100, Amoxicillin stok 50, dan Betadine stok 100. Pada menu Designer terlihat tabel pasien dan tabel obat sudah terhubung ke tabel transaksi_obat."
+    </div>
+  </div>
+
+  <!-- LANGKAH 8 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 8 — Membuat & Menguji Trigger <code>tg_stok_obat</code></span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin Windows:</strong>
+      <ol>
+        <li>Klik tabel <strong><code>transaksi_obat</code></strong> di panel kiri &rarr; klik tab <strong><code>Triggers</code></strong> di menu atas.</li>
+        <li>Klik <strong><code>Create new trigger</code></strong> (atau <code>Add trigger</code>):
+          <ul>
+            <li><strong>Trigger name</strong>: <code>tg_stok_obat</code></li>
+            <li><strong>Table</strong>: <code>transaksi_obat</code></li>
+            <li><strong>Time</strong>: <code>AFTER</code></li>
+            <li><strong>Event</strong>: <code>INSERT</code></li>
+          </ul>
+        </li>
+        <li>Copy kode di bawah ini ke kotak <strong>Definition</strong> lalu klik <strong><code>Go</code></strong>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-trig', this)">📋 Copy Kode Trigger tg_stok_obat</button>
+      <pre id="c-trig">UPDATE obat SET stok = stok - NEW.jumlah WHERE id_obat = NEW.id_obat</pre>
+      <ol start="4">
+        <li>Sekarang uji Trigger tersebut: klik tab <strong><code>Insert</code></strong> pada tabel <code>transaksi_obat</code>, lalu isi:
+          <ul>
+            <li><code>id_transaksi</code>: <code>1</code></li>
+            <li><code>id_pasien</code>: pilih <code>6</code> (Hanif)</li>
+            <li><code>id_obat</code>: pilih <code>1</code> (Paracetamol)</li>
+            <li><code>jumlah</code>: <code>15</code></li>
+            <li><code>total_harga</code>: <code>75000</code></li>
+          </ul>
+          Klik tombol <strong><code>Go</code></strong>.
+        </li>
+        <li>Klik tabel <strong><code>obat</code></strong> di panel kiri: tunjukkan stok <strong>Paracetamol</strong> otomatis berkurang dari <strong>100</strong> menjadi <strong>85</strong>!</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Pada tabel transaksi_obat kita buka menu Triggers lalu klik Create new trigger. Kita beri nama tg_stok_obat, waktu AFTER, dan event INSERT, dengan perintah UPDATE obat SET stok = stok - NEW.jumlah WHERE id_obat = NEW.id_obat, lalu klik Go. Sekarang kita uji dengan menginput transaksi pembelian Paracetamol sebanyak 15 buah oleh pasien ID 6. Setelah disimpan dan kita cek tabel obat, stok Paracetamol otomatis berkurang dari 100 menjadi 85."
+    </div>
+  </div>
+
+  <!-- LANGKAH 9 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 9 — Replikasi Tahap 1: Buat User Replikasi & Konfigurasi Master (Windows)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi Klik di phpMyAdmin & XAMPP Windows:</strong>
+      <ol>
+        <li>Klik ikon rumah (<strong>Home</strong> phpMyAdmin di pojok kiri atas) &rarr; klik tab <strong><code>User accounts</code></strong> &rarr; klik <strong><code>Add user account</code></strong>:
+          <ul>
+            <li><strong>User name</strong>: <code>subhan</code></li>
+            <li><strong>Host name</strong>: pilih <code>Any host</code> (<code>%</code>)</li>
+            <li><strong>Password</strong> & <strong>Re-type</strong>: <code>1234</code></li>
+            <li>Scroll ke bagian <strong>Administration</strong>: centang <strong><code>Replication client</code></strong> dan <strong><code>Replication slave</code></strong>, lalu klik <strong><code>Go</code></strong> di paling bawah.</li>
+          </ul>
+        </li>
+        <li>Klik ikon rumah (<strong>Home</strong>) &rarr; klik tab <strong><code>Replication</code></strong> &rarr; pada kotak <em>Primary replication</em> klik <strong><code>configure</code></strong> &rarr; pilih database <code>rumah_sakit</code>.</li>
+        <li>Buka <strong>XAMPP Control Panel</strong> &rarr; pada baris MySQL klik <strong><code>Config</code> &rarr; <code>my.ini</code></strong>.</li>
+        <li>Cari tulisan <code>[mysqld]</code>, lalu tempelkan 3 baris di bawah ini tepat di bawah <code>[mysqld]</code> (dan beri tanda pagar <code>#server-id = 1</code> pada baris <code>server-id = 1</code> lama di bawahnya agar tidak ganda):</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-myini', this)">📋 Copy Konfigurasi my.ini Master (Windows)</button>
+      <pre id="c-myini">log-bin=mysql-bin
+server-id=1
+binlog-do-db=rumah_sakit</pre>
+      <ol start="5">
+        <li>Tekan <code>Ctrl + S</code> (Save) di Notepad <code>my.ini</code>, lalu di XAMPP Control Panel klik <strong><code>Stop</code></strong> pada MySQL, tunggu 2 detik, lalu klik <strong><code>Start</code></strong> kembali.</li>
+        <li>Kembali ke tab <strong><code>Replication</code></strong> di phpMyAdmin Windows &rarr; klik <strong><code>Show primary status</code></strong> &rarr; catat nama <strong>File</strong> (misal <code>mysql-bin.000001</code>) dan angka <strong>Position</strong> (misal <code>328</code>).</li>
+        <li>Klik database <strong><code>rumah_sakit</code></strong> di panel kiri &rarr; klik tab <strong><code>Export</code></strong> &rarr; klik tombol <strong><code>Export</code> / <code>Go</code></strong> untuk mengunduh <code>rumah_sakit.sql</code>.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Sekarang kita masuk ke bagian kedua yaitu Praktikum Basis Data Terdistribusi menggunakan Replikasi Master-Slave dari Windows ke Ubuntu di VirtualBox. Pertama di phpMyAdmin Windows kita buat akun user replikasi bernama subhan dengan host persen serta hak akses Replication client dan Replication slave. Selanjutnya pada menu Replication kita konfigurasi Primary replication untuk database rumah_sakit, lalu kita tempelkan konfigurasi log-bin=mysql-bin, server-id=1, dan binlog-do-db=rumah_sakit ke dalam file my.ini pada XAMPP Windows dan merestart MySQL. Setelah aktif, kita catat nama File dan Position pada Show primary status, lalu kita export database rumah_sakit menjadi file rumah_sakit.sql."
+    </div>
+  </div>
+
+  <!-- LANGKAH 10 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 10 — Replikasi Tahap 2: Cek IP & Ping (Windows &harr; Ubuntu VirtualBox)</span>
+    <div class="action-box">
+      <strong>🖱 Aksi di VirtualBox, CMD Windows, dan Terminal Ubuntu:</strong>
+      <ol>
+        <li>Di jendela VirtualBox: klik menu <strong><code>Machine</code> &rarr; <code>Settings</code> &rarr; <code>Network</code></strong>, tunjukkan bahwa <code>Attached to</code> menggunakan <strong><code>Host-Only Adapter</code></strong> (atau <code>Bridged Adapter</code>).</li>
+        <li>Buka <strong>Command Prompt (CMD)</strong> di Windows, ketik <code>ipconfig</code> (lihat IPv4 VirtualBox Host-Only, biasanya <code>192.168.56.1</code>).</li>
+        <li>Buka <strong>Terminal</strong> di Ubuntu VirtualBox, ketik <code>ip a</code> (lihat IPv4 Ubuntu, misal <code>192.168.56.101</code>).</li>
+        <li>Tes ping dari CMD Windows: <code>ping 192.168.56.101</code> dan dari Terminal Ubuntu: <code>ping 192.168.56.1</code>.</li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan:</strong><br>
+      "Sebelum menghubungkan replikasi ke Ubuntu di VirtualBox, kita pastikan pengaturan Network di VirtualBox menggunakan Host-Only Adapter. Kita cek IP di Windows menggunakan ipconfig dan di Terminal Ubuntu menggunakan ip a, lalu kita lakukan uji ping dua arah untuk memastikan kedua sistem operasi sudah saling terhubung."
+    </div>
+  </div>
+
+  <!-- LANGKAH 11 -->
+  <div class="step-card">
+    <span class="step-num">Langkah 11 — Replikasi Tahap 3: Konfigurasi Slave Ubuntu & Pembuktian Real-Time</span>
+    <div class="action-box">
+      <strong>🖱 Aksi di Ubuntu VirtualBox:</strong>
+      <ol>
+        <li>Nyalakan XAMPP di Terminal Ubuntu dan edit <code>/opt/lampp/etc/my.cnf</code>:</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-ubu1', this)">📋 Copy Perintah Terminal Ubuntu</button>
+      <pre id="c-ubu1">sudo /opt/lampp/lampp start
+sudo /opt/lampp/bin/mysql_upgrade -u root --force
+sudo chmod a+rwx /opt/lampp/etc/my.cnf
+sudo nano /opt/lampp/etc/my.cnf</pre>
+      <ol start="2">
+        <li>Di dalam <code>my.cnf</code> di bawah <code>[mysqld]</code>, beri tanda pagar pada <code>#server-id = 1</code> dan tambahkan:
+          <pre>server-id=2
+replicate-do-db=rumah_sakit</pre>
+          Simpan (<code>Ctrl + O</code>, <code>Enter</code>, <code>Ctrl + X</code>), lalu jalankan:
+          <pre>sudo chmod 644 /opt/lampp/etc/my.cnf
+sudo /opt/lampp/lampp restart</pre>
+        </li>
+        <li>Buka browser Firefox di Ubuntu (<code>http://localhost/phpmyadmin</code>) &rarr; buat database <strong><code>rumah_sakit</code></strong> &rarr; klik tab <strong><code>Import</code></strong> &rarr; impor file <code>rumah_sakit.sql</code> dari Windows tadi.</li>
+        <li>Klik tab <strong><code>SQL</code></strong> di phpMyAdmin Ubuntu, lalu jalankan perintah ini (sesuaikan IP Windows, nama File, dan angka Position dari Langkah 9):</li>
+      </ol>
+      <button class="copy-btn" onclick="copyCode('c-slave', this)">📋 Copy Query CHANGE MASTER TO (di Slave Ubuntu)</button>
+      <pre id="c-slave">STOP SLAVE;
+CHANGE MASTER TO
+  MASTER_HOST='192.168.56.1',
+  MASTER_USER='subhan',
+  MASTER_PASSWORD='1234',
+  MASTER_LOG_FILE='mysql-bin.000001',
+  MASTER_LOG_POS=328;
+START SLAVE;</pre>
+      <ol start="5">
+        <li>Klik tab <strong><code>Replication</code></strong> di phpMyAdmin Ubuntu &rarr; klik <strong><code>See slave status table</code></strong> (atau <code>See replica status table</code>) &rarr; tunjuk baris <strong><code>Slave_IO_Running: Yes</code></strong> dan <strong><code>Slave_SQL_Running: Yes</code></strong>!</li>
+        <li><strong>Uji Sinkronisasi Real-Time:</strong>
+          <ul>
+            <li>Di phpMyAdmin <strong>Windows (Master)</strong>, buka tabel <code>transaksi_obat</code> &rarr; klik <strong><code>Insert</code></strong> &rarr; masukkan pembelian ke-2: <code>id_pasien = 8 (Dudung)</code>, <code>id_obat = 3 (Betadine)</code>, <code>jumlah = 25</code>, <code>total_harga = 375000</code> &rarr; klik <strong><code>Go</code></strong>.</li>
+            <li>Tunjukkan di tabel <code>obat</code> Windows: stok Betadine berkurang dari <strong>100</strong> menjadi <strong>75</strong>.</li>
+            <li>Pindah ke phpMyAdmin <strong>Ubuntu (Slave)</strong>, klik <strong><code>Browse</code> / Refresh</strong> pada tabel <code>transaksi_obat</code> dan tabel <code>obat</code>: tunjukkan transaksi ke-2 otomatis masuk dan stok Betadine di Ubuntu otomatis berkurang menjadi <strong>75</strong>!</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <div class="voice-box">
+      🎙 <strong>Kalimat yang Diucapkan (Sekaligus Penutup):</strong><br>
+      "Di sisi Slave Ubuntu, kita mengimpor database rumah_sakit.sql, mengatur file my.cnf dengan server-id=2 dan replicate-do-db=rumah_sakit, merestart XAMPP Ubuntu, lalu menjalankan perintah STOP SLAVE, CHANGE MASTER TO sesuai IP Master Windows serta posisi log-nya, dan START SLAVE. Pada tabel status replica terlihat Slave_IO_Running dan Slave_SQL_Running keduanya bernilai Yes. Terakhir kita uji dengan menambahkan transaksi pembelian 25 Betadine di Master Windows sehingga stoknya turun dari 100 menjadi 75. Ketika kita refresh phpMyAdmin di Ubuntu, data transaksi kedua otomatis muncul dan stok Betadine di Ubuntu juga otomatis berkurang menjadi 75. Sekian praktikum Tugas 3 Basis Data dari saya, mohon maaf apabila ada kekurangan. Wassalamualaikum warahmatullahi wabarakatuh."
+    </div>
+  </div>
+</div>
+
+<script>
+function copyCode(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text);
+  const old = btn.innerText;
+  btn.innerText = "✅ Berhasil Disalin! (Tinggal Ctrl+V)";
+  setTimeout(() => btn.innerText = old, 2000);
+}
+</script>
+</body>
+</html>
