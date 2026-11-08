@@ -1,0 +1,61 @@
+================================================================================
+  PANDUAN CARA UPLOAD & PUSH KE REPOSITORI GITHUB MILIK SUBHAN YOGA MAULANA
+================================================================================
+
+Jika Tutor atau Dosen meminta agar hasil praktikum Tugas 3 ini di-upload ke akun
+GitHub milik mahasiswa sendiri, ikuti salah satu dari 2 cara mudah di bawah ini.
+
+--------------------------------------------------------------------------------
+CARA 1: LEWAT BROWSER GITHUB.COM (PALING MUDAH - TANPA PERLU KETIK PERINTAH)
+--------------------------------------------------------------------------------
+1. Buka browser, masuk ke akun GitHub Subhan di: https://github.com
+2. Klik tombol "New" (warna hijau) atau buka tautan: https://github.com/new
+3. Pada kolom "Repository name", beri nama yang rapi, contoh:
+   praktikum-basis-data-tugas3
+   (atau: tugas3-basis-data-msim4206)
+4. Pilih opsi "Public" agar bisa diperiksa oleh dosen.
+5. Centang "Add a README file", lalu klik tombol hijau "Create repository".
+6. Setelah halaman repository terbuka:
+   - Klik tombol "Add file" di kanan atas -> pilih "Upload files".
+   - Buka folder tugas ini di komputer, lalu tarik (drag & drop) file-file penting
+     ke browser:
+     * Laporan Word & PDF (.docx & .pdf)
+     * File ERD yEd (skema_rumah_sakit.graphml)
+     * File skrip SQL (00_persiapan_tugas2.sql & 01_full_transaksi_dan_trigger.sql)
+     * Naskah bacaan (.txt atau .md)
+     (Catatan: Untuk file video .mp4 karena ukurannya >10 MB, lebih baik di-upload
+      ke YouTube sesuai instruksi utama, lalu link YouTube-nya ditulis di README).
+   - Scroll ke bawah, klik tombol hijau "Commit changes".
+7. Selesai! Link repository GitHub Subhan adalah:
+   https://github.com/NAMA_AKUN_SUBHAN/praktikum-basis-data-tugas3
+
+
+--------------------------------------------------------------------------------
+CARA 2: MENGGUNAKAN GIT COMMAND LINE / TERMINAL POWERSHELL
+--------------------------------------------------------------------------------
+Jika laptop Subhan sudah terpasang Git, ikuti perintah ini:
+
+1. Buat repository baru di https://github.com/new (misal: praktikum-basis-data-tugas3)
+   dengan opsi Public dan jangan centang README.
+2. Buka folder tugas ini di File Explorer.
+3. Klik kanan di area kosong -> pilih "Open in Terminal" atau "Open Git Bash here".
+4. Jalankan perintah berikut secara berurutan:
+
+   git init -b main
+   git add .
+   git commit -m "feat: pengumpulan praktikum tugas 3 basis data msim4206"
+   git remote add origin https://github.com/NAMA_AKUN_SUBHAN/praktikum-basis-data-tugas3.git
+   git push -u origin main
+
+   (Ganti NAMA_AKUN_SUBHAN dengan username GitHub milik Subhan sendiri).
+
+
+--------------------------------------------------------------------------------
+LINK ORGANISASI GITHUB KELAS UT (DARI PENGUMUMAN DOSEN):
+--------------------------------------------------------------------------------
+Dosen menyertakan formulir pendaftaran akun GitHub mahasiswa ke organisasi kelas:
+https://docs.google.com/forms/d/1NjkNOb2e0_ptEWXSWq10xs7nTeNvjDCBx4eSybNnor0
+
+Silakan isi form tersebut menggunakan username GitHub Subhan jika tutor kelas
+mewajibkan akun mahasiswa terdaftar di organisasi GitHub mata kuliah.
+================================================================================
