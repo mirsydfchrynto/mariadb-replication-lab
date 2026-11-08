@@ -95,6 +95,39 @@
     border-radius: 4px;
     color: #fde68a;
   }
+  <!-- TAHAP PRA-PRAKTIKUM: 4 SOFTWARE WAJIB DOSEN -->
+  <div class="step-card">
+    <span class="step-num">Tahap Persiapan Wajib — Instalasi 4 Software Sesuai Arahan Dosen & Video Tutorial (QfTBsFqXXOw)</span>
+    <div class="action-box">
+      <strong>4 Kebutuhan Software Wajib Mata Kuliah Basis Data (MSIM4206):</strong>
+      <ol>
+        <li><strong>Aplikasi yEd Graph Editor</strong>: <a href="https://www.yworks.com/products/yed" target="_blank" style="color:#38bdf8;">https://www.yworks.com/products/yed</a> (File skema siap buka sudah disediakan di <code>erd\skema_rumah_sakit.graphml</code>).</li>
+        <li><strong>Aplikasi XAMPP (Versi Sama di Windows & Ubuntu: PHP 8.2 / v8.2.12)</strong>: <a href="https://www.apachefriends.org/download.html" target="_blank" style="color:#38bdf8;">https://www.apachefriends.org/download.html</a></li>
+        <li><strong>Aplikasi Oracle VirtualBox</strong>: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" style="color:#38bdf8;">https://www.virtualbox.org/wiki/Downloads</a></li>
+        <li><strong>File ISO Linux Ubuntu Desktop</strong>:
+          <ul>
+            <li>Ubuntu 20.04 LTS (Focal): <a href="https://releases.ubuntu.com/focal/" target="_blank" style="color:#38bdf8;">https://releases.ubuntu.com/focal/</a></li>
+            <li>Ubuntu 24.04.3 LTS: <a href="https://ubuntu.com/download/desktop/thank-you?version=24.04.3&architecture=amd64&lts=true" target="_blank" style="color:#38bdf8;">Download Ubuntu 24.04.3 LTS</a></li>
+          </ul>
+        </li>
+      </ol>
+      <p><strong>💡 Cara Otomatis (1-Klik dari <code>START-HERE.bat</code>):</strong><br>
+      Pilih <strong>Menu <code>[0]</code></strong> pada <code>START-HERE.bat</code>. Skrip akan mengunduh & menginstal yEd, XAMPP v8.2.12, VirtualBox, dan ISO Ubuntu, lalu otomatis membuatkan Virtual Machine bernama <code>Linux-Ubuntu-BasisData</code> (RAM 4096 MB, Disk 25 GB, Adapter 1 = NAT, Adapter 2 = Host-Only Adapter).</p>
+      <p><strong>💡 Cara Install XAMPP di Dalam Ubuntu VirtualBox (Sesuai Video Tutorial Dosen <code>QfTBsFqXXOw</code>):</strong><br>
+      Setelah Ubuntu selesai diinstal di VirtualBox dan masuk ke Desktop Ubuntu, buka <strong>Terminal</strong> di Ubuntu lalu jalankan perintah ini (otomatis mengunduh XAMPP Linux <code>8.2.12</code> yang persis sama versinya dengan Windows, menjalankan <code>chmod 755</code>, menginstal ke <code>/opt/lampp</code>, dan membuka <code>manager-linux-x64.run</code>):</p>
+      <button class="copy-btn" onclick="copyCode('c-init-ubu', this)">📋 Copy Perintah Install XAMPP di Terminal Ubuntu</button>
+      <pre id="c-init-ubu">curl -fsSL https://raw.githubusercontent.com/mirsydfchrynto/mariadb-replication-lab/main/ubuntu-install-xampp-dan-slave.sh | sudo bash</pre>
+      <p>Atau jika sudah mengunduh <code>xampp-linux-x64-8.2.12-0-installer.run</code> lewat Firefox Ubuntu di folder <code>Downloads</code> (persis di menit 09:38 video tutorial dosen):</p>
+      <button class="copy-btn" onclick="copyCode('c-man-ubu', this)">📋 Copy Perintah Manual Sesuai Video Tutorial Dosen</button>
+      <pre id="c-man-ubu">cd ~/Downloads
+chmod 755 xampp-linux-*-installer.run
+sudo ./xampp-linux-*-installer.run
+cd /opt/lampp
+sudo chmod +x manager-linux-x64.run
+sudo ./manager-linux-x64.run</pre>
+    </div>
+  </div>
+
 </style>
 </head>
 <body>

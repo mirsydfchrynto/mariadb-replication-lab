@@ -15,8 +15,12 @@ set "MY_INI=%MYSQL_BIN%\my.ini"
 cls
 echo ================================================================================
 echo   CONTROL PANEL PRAKTIKUM BASIS DATA (TRANSAKSI ^& REPLIKASI MASTER-SLAVE)
-echo ================================================================================
-echo   Lokasi XAMPP Terdeteksi : %XAMPP_DIR%
+echo   PILIH MODE PENGERJAAN DI LAPTOP WINDOWS INI:
+echo.
+echo   [0] DOWNLOAD ^& INSTALL 4 SOFTWARE WAJIB DOSEN + AUTO-CREATE VM UBUNTU
+echo       - Otomatis download ^& install: (1) yEd Graph Editor, (2) XAMPP v8.2.12,
+echo         (3) Oracle VirtualBox, dan (4) File ISO Linux Ubuntu (20.04 / 24.04)
+echo       - Otomatis membuat VM Ubuntu di VirtualBox (RAM 4GB, Disk 25GB, NAT + Host-Only)
 echo.
 echo   PILIH MODE PENGERJAAN DI LAPTOP WINDOWS INI:
 echo.
@@ -36,14 +40,22 @@ echo       - Otomatis memasang seluruh transaksi1-5, tabel obat, trigger, my.ini
 echo         user replikasi, dan menghasilkan file rumah_sakit.sql + COPAS-KE-UBUNTU.txt
 echo.
 echo   [4] BUKA PANDUAN AWAM ^& FOLDER LAPORAN WORD (.DOCX / .PDF)
-echo   [0] KELUAR
+echo   [9] KELUAR
 echo ================================================================================
-set /p PILIH="Masukkan pilihan Anda (1/2/3/4/0): "
+set /p PILIH="Masukkan pilihan Anda (0/1/2/3/4/9): "
 
+if "%PILIH%"=="0" goto MODE_INSTALL_SOFTWARE
 if "%PILIH%"=="1" goto MODE_DASAR
 if "%PILIH%"=="2" goto MODE_AUTO_PELAN
 if "%PILIH%"=="3" goto MODE_INSTAN
 if "%PILIH%"=="4" goto MODE_DOKUMEN
+if "%PILIH%"=="9" exit /b 0
+goto MENU
+
+:MODE_INSTALL_SOFTWARE
+powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT_DIR%0-INSTALL-SOFTWARE-WAJIB-WINDOWS.ps1"
+pause
+goto MENU
 if "%PILIH%"=="0" exit /b 0
 goto MENU
 
